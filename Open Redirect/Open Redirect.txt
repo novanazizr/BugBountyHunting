@@ -1,0 +1,31 @@
+##BugBountyTips ##OpenRedirect
+
+Author : @NovanAR
+GitHub : https://github.com/novanazizr
+  
+How to find open redirect?
+  
+  1. If the Applictaion have a user Sign-In/Sign-Up feature, then register a user and log in as the 		user.
+  
+  2. Go to your user profile page , for example : example.com/accounts/profile
+  
+  3. Copy the profile page's URL
+  
+  4. Logout and Clear all the cookies and go to the homepage of the site.
+  
+  5. Paste the Copied Profile URL on the address bar 
+  
+  6. If the site prompts for a login , check the address bar , you may find the login page with a 			redirect parameter like the following
+        
+    	- https://vuln.me/login?next=/accounts/profile
+        - https://vuln.me/login?returnUrl=/accounts/profile
+    
+How to bypass it?
+    
+  1. https://vuln.me/login?next=https://vuln.me@evil.com ( due to bad regex )
+  2. https://vuln.me/login?next=http://evil%E3%80%82com (  By using the character 。 (%E3%80%82 url encoded) instead of a normal dot in urls, it is possible to bypass the blocking. )
+    
+    
+Recommended open redirect bypass tool
+    
+  -https://github.com/adelittle/aincurl
