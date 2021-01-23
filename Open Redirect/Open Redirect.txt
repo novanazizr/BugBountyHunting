@@ -26,6 +26,11 @@ How to bypass it?
   2. https://vuln.me/login?next=http://evil%E3%80%82com (  By using the character 。 (%E3%80%82 url encoded) instead of a normal dot in urls, it is possible to bypass the blocking. )
     
     
+Try to leverage it to XSS
+    
+   - https://vuln.me/login?next=javascript:alert(1);//
+    
+    
 Recommended open redirect bypass tool
     
-  -https://github.com/adelittle/aincurl
+  - https://github.com/adelittle/aincurl
