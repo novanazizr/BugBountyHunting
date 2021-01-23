@@ -5,7 +5,7 @@ GitHub : https://github.com/novanazizr
   
 How to find open redirect?
   
-  1. If the Applictaion have a user Sign-In/Sign-Up feature, then register a user and log in as the 		user.
+  1. If the Applictaion have a user Sign-In/Sign-Up feature, then register a user and log in as the user.
   
   2. Go to your user profile page , for example : example.com/accounts/profile
   
@@ -15,7 +15,7 @@ How to find open redirect?
   
   5. Paste the Copied Profile URL on the address bar 
   
-  6. If the site prompts for a login , check the address bar , you may find the login page with a 			redirect parameter like the following
+  6. If the site prompts for a login , check the address bar , you may find the login page with a redirect parameter like the following
         
     	- https://vuln.me/login?next=/accounts/profile
         - https://vuln.me/login?returnUrl=/accounts/profile
