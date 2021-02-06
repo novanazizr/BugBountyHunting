@@ -1,0 +1,11 @@
+##BugBountyTips ##Credit_Card_Fraud
+
+Found a target with an e-commerce checkout?
+
+Try this test credit card number "4242 4242 4242 4242" Use any CVV and Credit Card Date
+
+If the payment was succeeded go report it.
+
+The impact was Business loss, any user can checkout a product using a test credit card number
+
+For more information check in here : https://stripe.com/docs/testing
