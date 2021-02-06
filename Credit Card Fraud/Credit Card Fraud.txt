@@ -1,5 +1,8 @@
 ##BugBountyTips ##Credit_Card_Fraud
 
+Author : @NovanAR
+GitHub : https://github.com/novanazizr
+
 Found a target with an e-commerce checkout?
 
 Try this test credit card number "4242 4242 4242 4242" Use any CVV and Credit Card Date
