@@ -1,0 +1,22 @@
+"-----BEGIN EC PRIVATE KEY-----" | " -----BEGIN EC PARAMETERS-----" ext:pem | ext:key | ext:txt
+inurl:example.com intitle:"index of"
+inurl:example.com intitle:"index of /" "*key.pem"
+inurl:example.com ext:log
+inurl:example.com intitle:"index of" ext:sql|xls|xml|json|csv
+inurl:example.com "MYSQL_ROOT_PASSWORD:" ext:env OR ext:yml -git
+inurl:example.com intitle:"index of" "config.db"
+inurl:example.com allintext:"API_SECRET*" ext:env | ext:yml
+inurl:example.com intext:admin ext:sql inurl:admin
+inurl:example.com allintext:username,password filetype:log
+site:example.com "-----BEGIN RSA PRIVATE KEY-----" inurl:id_rsa
+DB_USERNAME filetype:env
+DB_PASSWORD filetype:enc=v
+filetype:txt site:web.com password|passwords|contraseñas|login|contraseña
+filetype:sql “MySQL dump” (pass|password|passwd|pwd)
+site:gov filetype:pdf allintitle:restricted
+allintext:password filetype:log after:2020
+intitle:"index of" inurl:ftp
+intitle:"index of" inurl:http after:2020
+filetype:xls inurl:"email.xls"
+intitle:index.of id_rsa -id_rsa.pub
+filetype:log username putty  
